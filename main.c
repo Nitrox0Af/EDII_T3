@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <ctype.h>
+#include"best.h"
 
 int main(int argc, char** argv){
     FILE* fp = fopen(argv[1], "r");
@@ -18,6 +19,8 @@ int main(int argc, char** argv){
     for(int i = 0; i<tam_arq; i++){
         fscanf(fp, "%d\n", &entrada[i]);
     }
-
+    int num=best_fit(entrada,tam_arq);
+    fclose(fp);
+    free(entrada);
     return 0;
 }
