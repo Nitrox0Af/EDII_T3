@@ -5,6 +5,7 @@ typedef struct best Best;
 
 struct best
 {
+    int qtd_disco;
     void *prim;
     void *ult;
 };

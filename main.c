@@ -37,9 +37,8 @@ int main(int argc, char **argv)
     time = ((double)t) / ((CLOCKS_PER_SEC)); //! tempo em segundos
     printf("best fit: %f (s) // discos: %d\n", time, num);
 
+    printf("best fit ");
     qsort(entrada, tam_arq, sizeof(int), comparador);
-    // for(int i=0; i<tam_arq; i++) printf("%d\n", entrada[i]);
-
     t = clock(); //! armazena tempo
     num = best_fit(entrada, tam_arq);
     t = clock() - t;

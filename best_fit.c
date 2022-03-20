@@ -1,6 +1,7 @@
 #include "best.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 typedef struct best_fit Best_fit;
 
@@ -17,7 +18,7 @@ Best *ordena_bloco_lista(Best_fit *bloco, Best *lista);
 void deleta_lista(Best *lista);
 
 Best_fit *cria_bloco(int num);
-Best_fit *escolhe_maior(Best_fit *bloco, int numero);
+Best_fit *escolhe_maior(Best_fit *bloco, int numero, int qtd_disco);
 Best_fit *deleta_bloco(Best_fit *bloco);
 
 int best_fit(int *vetor, int tmn_vetor)
@@ -37,23 +38,22 @@ int best_fit(int *vetor, int tmn_vetor)
     for (int i = 0; i < tmn_vetor; i++)
     {
         numero = vetor[i];
-        aux = escolhe_maior((Best_fit *)lista->prim, numero);
+        aux = escolhe_maior((Best_fit *)lista->prim, numero, lista->qtd_disco);
         if (aux == NULL)
         {
             aux = cria_bloco(numero);
 
             lista = insere_bloco(aux, lista);
 
-            lista = ordena_bloco_lista(aux, lista);
+            //lista = ordena_bloco_lista(aux, lista);
             qtd_discos += 1;
         }
         else
         {
             aux->tamanho += numero;
-            lista = ordena_bloco_lista(aux, lista);
+            //lista = ordena_bloco_lista(aux, lista);
         }
     }
-    printf("qtd discos: %d\n", qtd_discos);
     deleta_lista(lista);
     return qtd_discos;
 }
@@ -63,6 +63,7 @@ Best *cria_lista()
     Best *aux = (Best *)malloc(sizeof(Best));
     aux->prim = NULL;
     aux->ult = NULL;
+    aux->qtd_disco=0;
     return aux;
 }
 
@@ -89,10 +90,11 @@ Best *insere_bloco(Best_fit *bloco, Best *lista)
         bloco->ant = aux;
         lista->ult = bloco;
     }
+    lista->qtd_disco+=1;
     return lista;
 }
 
-Best_fit *escolhe_maior(Best_fit *bloco, int numero)
+Best_fit *escolhe_maior(Best_fit *bloco, int numero, int qtd_disco)
 {
     Best_fit *aux = bloco, *retorno = NULL;
     int soma = 0;
@@ -103,10 +105,9 @@ Best_fit *escolhe_maior(Best_fit *bloco, int numero)
             retorno = aux;
             soma = aux->tamanho + numero;
             aux = aux->prox;
-            return retorno;
         }
         else
-            aux = aux->prox;
+            aux=aux->prox;
     }
     return retorno;
 }
@@ -128,7 +129,7 @@ Best_fit *deleta_bloco(Best_fit *bloco)
     return aux;
 }
 
-Best *ordena_bloco_lista(Best_fit *bloco, Best *lista)
+/*Best *ordena_bloco_lista(Best_fit *bloco, Best *lista)
 {
     Best_fit *ant = bloco->ant, *aux = bloco;
     if (ant == NULL)
@@ -187,4 +188,4 @@ Best *ordena_bloco_lista(Best_fit *bloco, Best *lista)
         }
     }
     return lista;
-}
+}*/
