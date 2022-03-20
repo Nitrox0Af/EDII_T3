@@ -103,6 +103,7 @@ Best_fit *escolhe_maior(Best_fit *bloco, int numero)
             retorno = aux;
             soma = aux->tamanho + numero;
             aux = aux->prox;
+            return retorno;
         }
         else
             aux = aux->prox;
