@@ -95,7 +95,22 @@ int main(int args, char** argv){
     fprintf(saida,"(Challenge)    |--------|------|---------------|---------------|--------------------\n");
     fprintf(saida,"1000000        |        |      |               |               |\n");
     fprintf(saida,"---------------|--------|------|---------------|---------------|--------------------");
-
+    fprintf(saida,"\n\ntempo do Worst Fit para 100: %.6f\n",timeWF[0]);
+    fprintf(saida,"tempo do Worst Fit para 1000: %.6f\n",timeWF[1]);
+    fprintf(saida,"tempo do Worst Fit para 10000: %.6f\n", timeWF[2]);
+    fprintf(saida,"tempo do Worst Fit para 100000: %.6f\n", timeWF[3]);
+    fprintf(saida,"tempo do Best Fit para 100: %.6f\n",timeBF[0]);
+    fprintf(saida,"tempo do Best Fit para 1000: %.6f\n",timeBF[1]);
+    fprintf(saida,"tempo do Best Fit para 10000: %.6f\n",timeBF[2]);
+    fprintf(saida,"tempo do Best Fit para 100000: %.6f\n",timeBF[3]);
+    fprintf(saida,"tempo do Worst Fit Decreasing para 100: %.6f\n", timeWFO[0]);
+    fprintf(saida,"tempo do Worst Fit Decreasing para 1000: %.6f\n", timeWFO[1]);
+    fprintf(saida,"tempo do Worst Fit Decreasing para 10000: %.6f\n", timeWFO[2]);
+    fprintf(saida,"tempo do Worst Fit Decreasing para 100000: %.6f\n", timeWFO[3]);
+    fprintf(saida,"tempo do Best Fit Decreasing para 100: %.6f\n", timeBFO[0]);
+    fprintf(saida,"tempo do Best Fit Decreasing para 1000: %.6f\n", timeBFO[1]);
+    fprintf(saida,"tempo do Best Fit Decreasing para 10000: %.6f\n", timeBFO[2]);
+    fprintf(saida,"tempo do Best Fit Decreasing para 100000: %.6f\n", timeBFO[3]);
     fclose(saida);
     return 0;
     
