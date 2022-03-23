@@ -7,28 +7,32 @@
 #include "bestFit.h"
 
 int main(int args, char** argv){
-    double timeBF[4] = {0,0,0,0}, timeBFO[4] = {0,0,0,0}, timeWF[4] = {0,0,0,0}, timeWFO[4] = {0,0,0,0};
-    int discBF[4] = {0,0,0,0}, discBFO[4] = {0,0,0,0}, discWF[4] = {0,0,0,0}, discWFO[4] = {0,0,0,0};
-    int n_linhas;
-    clock_t t; //variável para armazenar tempo
-    double time = 0;
-    char *nome_entrada[4] = {"100", "1000", "10000", "100000"};
+    //? Variaveis para rodar mais de um teste seguido
+    //double timeBF[4] = {0,0,0,0}, timeBFO[4] = {0,0,0,0}, timeWF[4] = {0,0,0,0}, timeWFO[4] = {0,0,0,0};
+    //int discBF[4] = {0,0,0,0}, discBFO[4] = {0,0,0,0}, discWF[4] = {0,0,0,0}, discWFO[4] = {0,0,0,0};
+    //clock_t t; //variável para armazenar tempo
+    //double time = 0;
+    //char *nome_entrada[4] = {"100", "1000", "10000", "100000"};
 
-    //argv[0] = executável
-    //argv[1] = caminho do arquivo de entrada
+    //?Variaveis para rodar apenas 1 teste
+    int n_linhas, wf, wfo, bf, bfo;
 
-    for (int k = 0; k < 4; k++){
+    //!argv[0] = executável
+    //!argv[1] = caminho do arquivo de entrada
 
-        //char entrada[100]="Entrada/";
-        //strcat(entrada, nome_entrada[k]);
-        //strcat(entrada, ".txt");
+    //for (int k = 0; k < 4; k++){
 
+        /*char entrada[100]="Entrada/";
+        strcat(entrada, nome_entrada[k]);
+        strcat(entrada, ".txt");
         char entrada[100]="\0";
         strcpy(entrada, argv[1]);
         strcat(entrada, nome_entrada[k]);
         strcat(entrada, ".txt");
+        FILE* f = fopen(entrada, "r");*/
 
-        FILE* f = fopen(entrada, "r");
+
+        FILE* f = fopen(argv[1], "r");
             if (f == NULL){
                 printf("ERRO: Arquivo não foi aberto\n");
                 return 0;
@@ -39,49 +43,58 @@ int main(int args, char** argv){
         int * lista_tam = (int*)malloc(sizeof(int) * n_linhas);
         int i = 0, item = 0;
 
-        //leitura das linhas do arquivo
+        //?leitura das linhas do arquivo
             while(i < n_linhas){
                 fscanf(f, "%d\n", &lista_tam[i]);
                 i++;
             }
 
+        
+        //! Calcula o minimo de pacotes necessário
         //int min = minPacotes(lista_tam, n_linhas);
         //printf("MIN:    %d\n\n", min);
 
         //! 1) --------------- WORST FIT ------------
-            t = clock();
+        /*    t = clock();
         discWF[k] = worstFit(lista_tam, n_linhas);
             t = clock() - t; //tempo final - tempo inicial
             timeWF[k] = ((double)t)/((CLOCKS_PER_SEC));
-        //printf("1   %f>>> %d >>>>\n", timeWF[k], discWF[k]);
+        //printf("1   %f>>> %d >>>>\n", timeWF[k], discWF[k]);*/
+            wf = worstFit(lista_tam, n_linhas);
 
         
         //! 2) --------------- BEST FIT ------------
-            t = clock();
+            /*t = clock();
         discBF[k] = best_fit(lista_tam, n_linhas);
             t = clock() - t;
             timeBF[k] = ((double)t) / ((CLOCKS_PER_SEC)); // tempo em segundos
-        //printf("2   %f>>> %d >>>>\n", timeBF[k], discBF[k]);
+        //printf("2   %f>>> %d >>>>\n", timeBF[k], discBF[k]);*/
+            bf = best_fit(lista_tam, n_linhas);
         
         //! 3) --------------- WORST FIT ORDENADO ------------
-            t = clock();
+            /*t = clock();
         discWFO[k] = worstFitOrdenado(lista_tam, n_linhas);
             t = clock() - t; //tempo final - tempo inicial
             timeWFO[k] = ((double)t)/((CLOCKS_PER_SEC));
-        //printf("3   %f>>> %d >>>>\n", timeWFO[k], discWFO[k]);
+        //printf("3   %f>>> %d >>>>\n", timeWFO[k], discWFO[k]);*/
+            wfo = worstFitOrdenado(lista_tam, n_linhas);
 
         //! 4) --------------- BEST FIT ORDENADO ------------
-            t = clock(); //armazena tempo
+           /* t = clock(); //armazena tempo
         discBFO[k] = bestFitOrdenado(lista_tam, n_linhas);
             t = clock() - t;
             timeBFO[k] = ((double)t) / ((CLOCKS_PER_SEC)); //tempo em segundos
-        //printf("4   %f>>> %d >>>>\n", timeBFO[k], discBFO[k]);
+        //printf("4   %f>>> %d >>>>\n", timeBFO[k], discBFO[k]);*/
+            bfo = bestFitOrdenado(lista_tam, n_linhas);
+
+        //!Imprime: WORST FIT -> BEST FIT -> WORST FIT ORDENADO -> BEST FIT ORDENADO
+        printf("%d\n%d\n%d\n%d\n", wf, bf, wfo, bfo);
         
         free(lista_tam);
         fclose(f);
-    }
-    
-    FILE* saida = fopen("saida.txt", "w");
+    //}
+
+    /*FILE* saida = fopen("saida.txt", "w");
     fprintf(saida,"-------------------------------------------------------------------------------\n");
     fprintf(saida,"                       |    Number of disks\n");
     fprintf(saida,"               | Worst  | Best |   Worst-Fit   |  Best-Fit     |    Running time\n");
@@ -111,7 +124,6 @@ int main(int args, char** argv){
     fprintf(saida,"tempo do Best Fit Decreasing para 1000: %.6f\n", timeBFO[1]);
     fprintf(saida,"tempo do Best Fit Decreasing para 10000: %.6f\n", timeBFO[2]);
     fprintf(saida,"tempo do Best Fit Decreasing para 100000: %.6f\n", timeBFO[3]);
-    fclose(saida);
+    fclose(saida);*/
     return 0;
-    
 }

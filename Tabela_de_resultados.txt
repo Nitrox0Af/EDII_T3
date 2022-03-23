@@ -1,0 +1,30 @@
+-------------------------------------------------------------------------------
+                       |    Number of disks
+               | Worst  | Best |   Worst-Fit   |  Best-Fit     |    Running time
+     N         | Fit    | Fit  |   Decreasing  |  Decreasing   |     (seconds)
+---------------|--------|------|---------------|---------------|--------------------
+    100        |    52  |    45|        45     |        44     |       0.000086       
+   1000        |   452  |   408|       398     |       397     |       0.003822       
+  10000        |  4671  |  4127|      4024     |      4012     |       0.290403       
+ 100000        | 46732  | 41345|     40266     |     40201     |       27.750125       
+---------------|--------|------|---------------|---------------|--------------------
+(Challenge)    |--------|------|---------------|---------------|--------------------
+1000000        |        |      |               |               |
+---------------|--------|------|---------------|---------------|--------------------
+
+tempo do Worst Fit para 100: 0.000016
+tempo do Worst Fit para 1000: 0.000875
+tempo do Worst Fit para 10000: 0.081801
+tempo do Worst Fit para 100000: 6.966636
+tempo do Best Fit para 100: 0.000018
+tempo do Best Fit para 1000: 0.000828
+tempo do Best Fit para 10000: 0.062894
+tempo do Best Fit para 100000: 6.155333
+tempo do Worst Fit Decreasing para 100: 0.000027
+tempo do Worst Fit Decreasing para 1000: 0.000969
+tempo do Worst Fit Decreasing para 10000: 0.060002
+tempo do Worst Fit Decreasing para 100000: 5.769497
+tempo do Best Fit Decreasing para 100: 0.000025
+tempo do Best Fit Decreasing para 1000: 0.001150
+tempo do Best Fit Decreasing para 10000: 0.085706
+tempo do Best Fit Decreasing para 100000: 8.858659
